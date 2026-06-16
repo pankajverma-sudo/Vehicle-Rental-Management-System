@@ -1,0 +1,100 @@
+/*
+ * Vehicle Rental Management System
+ * Demonstrates:
+ * 1. Inheritance
+ * 2. Method Overriding
+ * 3. Polymorphism
+ * 4. super() Keyword
+ * 5. Dynamic Method Dispatch
+ */
+
+class Vehicle {
+    protected String vehicleNumber;
+    protected String brand;
+    protected double rentPerDay;
+
+    // Parent Constructor
+    public Vehicle(String vehicleNumber, String brand, double rentPerDay) {
+        this.vehicleNumber = vehicleNumber;
+        this.brand = brand;
+        this.rentPerDay = rentPerDay;
+    }
+
+    // Method to calculate rent
+    public double calculateRent(int days) {
+        return rentPerDay * days;
+    }
+
+    // Display vehicle details
+    public void displayDetails() {
+        System.out.println("Vehicle Number : " + vehicleNumber);
+        System.out.println("Brand          : " + brand);
+        System.out.println("Rent Per Day   : ₹" + rentPerDay);
+    }
+}
+
+// Car Class
+class Car extends Vehicle {
+
+    public Car(String vehicleNumber, String brand, double rentPerDay) {
+        super(vehicleNumber, brand, rentPerDay);
+    }
+
+    // Method Overriding
+    @Override
+    public double calculateRent(int days) {
+        double luxuryCharge = 500;
+        return (rentPerDay * days) + luxuryCharge;
+    }
+}
+
+// Bike Class
+class Bike extends Vehicle {
+
+    public Bike(String vehicleNumber, String brand, double rentPerDay) {
+        super(vehicleNumber, brand, rentPerDay);
+    }
+
+    // Method Overriding
+    @Override
+    public double calculateRent(int days) {
+        double discount = 100;
+        return (rentPerDay * days) - discount;
+    }
+}
+
+// Main Class
+public class VehicleRentalManagementSystem {
+
+    public static void main(String[] args) {
+
+        // Runtime Polymorphism
+        Vehicle vehicle1 = new Car("CAR101", "Toyota", 1000);
+        Vehicle vehicle2 = new Bike("BIKE201", "Honda", 350);
+
+        int days = 3;
+
+        System.out.println("======================================");
+        System.out.println("      VEHICLE RENTAL MANAGEMENT");
+        System.out.println("======================================\n");
+
+        System.out.println("----------- CAR DETAILS -----------");
+        vehicle1.displayDetails();
+        System.out.println("Rental Days    : " + days);
+        System.out.println("Total Rent     : ₹" +
+                vehicle1.calculateRent(days));
+
+        System.out.println();
+
+        System.out.println("---------- BIKE DETAILS ----------");
+        vehicle2.displayDetails();
+        System.out.println("Rental Days    : " + days);
+        System.out.println("Total Rent     : ₹" +
+                vehicle2.calculateRent(days));
+
+        System.out.println("\n======================================");
+        System.out.println("Project Demonstrates OOP Concepts");
+        System.out.println("Inheritance, Overriding, Polymorphism");
+        System.out.println("======================================");
+    }
+}
